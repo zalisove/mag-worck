@@ -1,26 +1,14 @@
-import UserInputItem from "./UserInputItem/UserInputItem";
-import { Container } from '@chakra-ui/react'
-function UserInputSection() {
+import {UserInputItem} from "./UserInputItem/UserInputItem";
+import {Container} from '@chakra-ui/react'
+import {useSelector} from "react-redux";
 
+const UserInputSection = () => {
+
+    const userInput = useSelector((state) => state.userInput);
 
     return (
         <Container height="100%" overflow="auto" maxWidth="full" padding="2px">
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
-            <UserInputItem/>
+            {userInput.map(item => <UserInputItem data={item}/>)}
         </Container>
     );
 }
