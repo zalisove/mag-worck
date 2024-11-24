@@ -29,7 +29,7 @@ ChartJS.register(
 
 export const GraphsItem = (props) => {
 
-    const [data, options] = useChartGeneration()
+    const [data, options] = useChartGeneration(props.data.id)
 
     return (
         <Container borderWidth="1px" maxWidth={"100%"} borderRadius="md" padding="5px" marginTop="5px" height={300}>

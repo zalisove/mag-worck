@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = [
     {
         id: 0,
-        type: "atmega_2560",
-        counterNumber: "0",
         body: {
             bitCount: 8,
-            TCCRnA: [false, true, false, false, false, false, false, false],
-            TCCRnB: [false, false, false, false, false, false, false, false],
+            stepCount: 0,
+            OCRA: [false, false, false, false, false, false, false, false],
+            TCCRnA: [false, false, null, null, null, null, false, false],
+            TCCRnB: [null, null, null, null, false, false, false, false],
         }
     }
 ];
@@ -23,11 +23,22 @@ export const userInputSlice = createSlice({
             if (itemIndex !== -1) {
                 state[itemIndex].body = { ...state[itemIndex].body, ...updatedValues };
             }
-            console.log(state[itemIndex].body)
         },
+        addNew: (state) => {
+            const newId = state[state.length - 1].id + 1; // Збільшуємо id на 1
+            state.push({
+                id: newId,
+                body: {
+                    bitCount: 8,
+                    OCRA: [false, false, false, false, false, false, false, false],
+                    TCCRnA: [false, false, null, null, null, null, false, false],
+                    TCCRnB: [null, null, null, null, false, false, false, false],
+                }
+            });
+        }
     },
 });
 
-export const { updateItem } = userInputSlice.actions;
+export const { updateItem, addNew } = userInputSlice.actions;
 
 export default userInputSlice.reducer;

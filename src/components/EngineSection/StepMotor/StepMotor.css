@@ -1,0 +1,37 @@
+.animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.magnet {
+    width: 100px;
+    height: 100px;
+    background-color: red; /* Magnet color */
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.1s linear;
+}
+
+.coil {
+    width: 20px;
+    height: 50px;
+    background-color: gray; /* Coil color */
+    position: absolute;
+    transition: background-color 0.2s;
+}
+
+/* Positioning coils around the magnet accurately */
+.coil:nth-child(1) { top: -30px; left: 40px; } /* Coil 1 */
+.coil:nth-child(2) { top: -30px; left: 15px; } /* Coil 2 */
+.coil:nth-child(3) { top: 30px; left: 15px; } /* Coil 3 */
+.coil:nth-child(4) { top: 30px; left: 40px; } /* Coil 4 */
+.coil:nth-child(5) { top: 15px; left: -30px; } /* Coil 5 */
+.coil:nth-child(6) { top: 40px; left: -30px; } /* Coil 6 */
+
+.coil.active {
+    background-color: orange; /* Active coil color */
+}

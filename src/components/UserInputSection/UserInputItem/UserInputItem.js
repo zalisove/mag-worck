@@ -7,7 +7,7 @@ import {
     Td,
     TableContainer,
     Switch,
-    Container,
+    Container, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper,
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { updateItem } from '../../../store/slice/userInputSlice';
@@ -15,7 +15,7 @@ import { updateItem } from '../../../store/slice/userInputSlice';
 export const UserInputItem = ({ data }) => {
     const dispatch = useDispatch();
     const { id, body } = data;
-    const { bitCount } = body;
+    const { bitCount, stepCount } = body;
 
     const onSwitch = (register, index, isChecked) => {
         const updatedValues = {
@@ -24,10 +24,17 @@ export const UserInputItem = ({ data }) => {
         dispatch(updateItem({ id, updatedValues }));
     };
 
+    const stepCountOnChange = (valueString) => {
+        const updatedValues = {
+            stepCount: parseInt(valueString)
+        };
+        dispatch(updateItem({ id, updatedValues}));
+    }
+
     const renderSwitches = (register) => {
         return body[register].map((item, index) => (
             <Td key={index}>
-                <Switch isChecked={item} onChange={(e) => onSwitch(register, index, e.target.checked)} />
+                <Switch isDisabled={item === null} isChecked={item} onChange={(e) => onSwitch(register, index, e.target.checked)} />
             </Td>
         ));
     };
@@ -56,6 +63,20 @@ export const UserInputItem = ({ data }) => {
                         <Tr>
                             <Td>TCCRnB</Td>
                             {renderSwitches('TCCRnB')}
+                        </Tr>
+                        <Tr>
+                            <Td>OCRA</Td>
+                            {renderSwitches('OCRA')}
+                        </Tr>
+                        <Tr>
+                            <Td>Кількість кроків</Td>
+                            <NumberInput size='sm' maxW={20} defaultValue={stepCount} min={0} onChange={stepCountOnChange}>
+                                <NumberInputField />
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
                         </Tr>
                     </Tbody>
                 </Table>
